@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import User from './modules/User.js';
+import Product from './modules/Product.js';
 dotenv.config();
 
 const app = express();
@@ -73,7 +74,36 @@ app.post ('/login', async (req,res)=>{
         }) 
     }
   
-})  
+}) ;
+
+// POST /product
+
+app.post('/product', async (req,res)=>{
+  const {name,description,price,category,brand,productImage} = req.body;
+
+  const product = new Product ({
+    name,
+    description,
+    price,
+    category,
+    brand,
+    productImage
+  })
+
+  const savedProduct = await product.save();
+
+  res.json({
+    success : true,
+    data : savedProduct,
+    message : "created student successfully"
+  })
+})
+
+//GET/products
+//GET/product/id
+//GET/Product/search/q ?
+//PUT/Product
+//DELETE/Product/id/regex
 const PORT = process.env.PORT || 5000 ;
 
 app.listen(PORT,()=>{
