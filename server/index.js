@@ -90,16 +90,36 @@ app.post('/product', async (req,res)=>{
     productImage
   })
 
-  const savedProduct = await product.save();
+  try{
+    const savedProduct = await product.save();
 
   res.json({
     success : true,
     data : savedProduct,
-    message : "created student successfully"
+    message : "product created successfuly...."
   })
+  }
+  catch (e){
+   res.json ({
+    success : false ,
+    message :e.message
+   })
+  }
 })
 
 //GET/products
+app.get('/products',async (req,res)=>{
+const products = await Product.find();
+ res.json({
+  success : true ,
+  data : products ,
+  message : "Successfully Find All Products......"
+ })
+
+ 
+})
+
+
 //GET/product/id
 //GET/Product/search/q ?
 //PUT/Product
