@@ -1,8 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import User from "./modules/User.js";
-import Product from "./modules/Product.js";
+import User from "./model/User.js";
+import Product from "./model/Product.js";
+import Order from "./model/Order.js";
+
 dotenv.config();
 
 const app = express();
@@ -133,50 +135,136 @@ app.put("/product/:id", async (req, res) => {
   const { id } = req.params;
   const { name, description, price, category, brand, productImage } = req.body;
 
-   await Product.updateOne(
+  await Product.updateOne(
     { _id: id },
     {
       $set: {
-        name : name,
-        description : description,
-        price : price,
-        category : category,
-        brand : brand,
-        productImage : productImage
-      }
+        name: name,
+        description: description,
+        price: price,
+        category: category,
+        brand: brand,
+        productImage: productImage,
+      },
     }
   );
 
   const updateProduct = await Product.findOne({ _id: id });
-console.log(updateProduct)
+  console.log(updateProduct);
   res.json({
-  success : true,
-  data :updateProduct,
-  message : "successfully update product....."
+    success: true,
+    data: updateProduct,
+    message: "successfully update product.....",
   });
 });
 
 //GET/Product/search/regex ?
-app.get('/product', async (req,res)=>{
-const {q} = req.query;
-const regexproduct = await Product.find({name : {$regex : q , $options : 'i'}})
-
-res.json({
-  success : true,
-  data : regexproduct,
-  message : "successfully find product"
-})
-})
+app.get("/product", async (req, res) => {
+  const { q } = req.query;
+  const regexproduct = await Product.find({
+    name: { $regex: q, $options: "i" },
+  });
+  res.json({
+    success: true,
+    data: regexproduct,
+    message: "successfully find product",
+  });
+});
 //DELETE/Product/id/
 
-app.delete('/product/:id',async (req,res)=>{
-  const {id}=req.params;
-await Product.deleteOne({_id:id})
+app.delete("/product/:id", async (req, res) => {
+  const { id } = req.params;
+  await Product.deleteOne({ _id: id });
   res.json({
-    success : true,
-    message :"succesfuly deleted product..."
-  })
-})
+    success: true,
+    message: "succesfuly deleted product...",
+  });
+});
+
+// Order/POST
+
+app.post("/order", async (req, res) => {
+  const { user, product, quantity, ordershipping, deliverycharges } = req.body;
+
+  const order = new Order({
+    user,
+    product,
+    quantity,
+    ordershipping,
+    deliverycharges,
+  });
+
+  try {
+    const savedOrder = await order.save();
+    res.json({
+      success: true,
+      data: savedOrder,
+      message: "order created successfully",
+    });
+  } catch (err) {
+    res.json({
+      success: false,
+      message: err.message,
+    });
+  }
+});
+
+//Order/GET/id
+
+app.get("/order/:id", async (req, res) => {
+  const { id } = req.params;
+
+  const order = await Order.findOne({ _id: id }).populate("user  product");
+
+  order.user.password = undefined;
+
+  res.json({
+    success: true,
+    data: order,
+    message: "find product successfuly",
+  });
+});
+
+//GET/products/
+app.get("/orders", async (req, res) => {
+  const findProducts = await Order.find().populate("user product");
+
+  findProducts.forEach((order) => {
+    order.user.password = undefined;
+  });
+  res.json({
+    success: true,
+    data: findProducts,
+    message: "fetch all productes.... !",
+  });
+});
+//GET/userbyid/
+
+app.get("/userbyid/:id", async (req, res) => {
+  const { id } = req.params;
+  const user = await Order.find({ _id: id }).populate("user product");
+  res.json({
+    success: true,
+    data: user,
+    message: "perticular user product",
+  });
+});
+
+// PATCH /status
+
+app.patch("/status/:id", async (req, res) => {
+  const { status } = req.body;
+  const { id } = req.params;
+  await Order.updateOne({ _id: id }, { $set: { status: status } });
+  const updatedProduct = await Order.findOne({ _id: id });
+  console.log(updatedProduct);
+  res.json({
+    success: true,
+    data: updatedProduct,
+    message: "update succssefully",
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
