@@ -1,0 +1,40 @@
+.signup-form-container{
+    height: 500px;
+    width: 500px;
+    background-color: rgb(250, 222, 112);
+    position: relative;
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    margin-top: 60px;
+    border-radius: 10px;
+}
+.heading{
+    color: #ff0080;
+}
+.input-box{
+    display: block;
+}
+.div-input-field{
+    margin: 10px;
+}
+.vector-image {
+    height: 400px; 
+    position: absolute;
+    bottom: 50px;
+    left: 200px; 
+}
+.gender-2{
+ margin-left: 100px;  
+ 
+}
+.gender-1{
+    margin-left: 50px;  
+}
+.signup-btn{
+    display: block;
+  margin-left: 120px;
+  margin-top: 30px;
+}
+
+

@@ -9,7 +9,7 @@ dotenv.config();
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json()); 
 
 const connectDB = async () => {
   const conn = await mongoose.connect(process.env.MONGODB_URI);
@@ -214,50 +214,50 @@ app.post("/order", async (req, res) => {
 app.get("/order/:id", async (req, res) => {
   const { id } = req.params;
 
-  const order = await Order.findOne({ _id: id }).populate("user  product");
+  const order = await Order.findById(id).populate("user  product"); //.lean();
 
   order.user.password = undefined;
 
   res.json({
     success: true,
-    data: order,
+    data: order,  
     message: "find product successfuly",
   });
 });
 
-//GET/products/
+//GET/orders/
 app.get("/orders", async (req, res) => {
-  const findProducts = await Order.find().populate("user product");
+  const findOrders = await Order.find().populate("user product");
 
-  findProducts.forEach((order) => {
+  findOrders.forEach((order) => {
     order.user.password = undefined;
   });
   res.json({
     success: true,
-    data: findProducts,
+    data: findOrders,
     message: "fetch all productes.... !",
   });
 });
 //GET/userbyid/
 
-app.get("/userbyid/:id", async (req, res) => {
+app.get("/order/user/:id", async (req, res) => {
   const { id } = req.params;
-  const user = await Order.find({ _id: id }).populate("user product");
+  const orders = await Order.find({ user: id }).populate("user product");
   res.json({
     success: true,
-    data: user,
+    data: orders,
     message: "perticular user product",
   });
 });
 
 // PATCH /status
 
-app.patch("/status/:id", async (req, res) => {
+app.patch("/order/status/:id", async (req, res) => {
   const { status } = req.body;
   const { id } = req.params;
   await Order.updateOne({ _id: id }, { $set: { status: status } });
   const updatedProduct = await Order.findOne({ _id: id });
-  console.log(updatedProduct);
+  
   res.json({
     success: true,
     data: updatedProduct,
