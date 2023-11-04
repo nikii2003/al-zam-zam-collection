@@ -1,0 +1,15 @@
+.login-continer{
+    height: 350px;
+    width: 500px;
+    background-color: rgb(250, 222, 112);
+    position: relative;
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    margin-top: 60px;
+    border-radius: 10px;
+}
+.login-btn{
+   margin-left: 150px;
+   margin-top: 20px;
+}
