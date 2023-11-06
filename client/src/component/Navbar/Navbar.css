@@ -1,0 +1,45 @@
+.navbar-flex{
+    display: flex;
+   justify-content: space-between;
+}
+.logo{
+    text-decoration: none;
+    font-size: 20px;
+    color: rgb(235, 209, 62);
+}
+.navbar-link{
+    text-decoration: none;
+    margin: 0 20px;
+    align-items: center;
+    color: white;
+}
+.navbar-link:hover{
+    color: red;
+}
+.navbar{
+    background-color: black;
+    padding: 25px;
+}
+.user{
+    color: yellow;
+}
+.navbar-logout{
+    color: white;
+}
+@media screen and (max-width : 768px){
+    .navbar-flex{
+        display: flex;
+        flex-direction: column;
+        
+    }
+    .navbar-link{
+        display: flex;
+        flex-direction: column;
+    }
+    .logo{
+     margin-left: 90px;
+    }
+   .navbar-logout{
+    margin-left: 57px;
+   }
+}

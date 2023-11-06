@@ -1,9 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+
 import './Signup.css'
 import image from './../../../../client/src/views/Signup/Sign up-rafiki.png';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
+import Navbar from '../../component/Navbar/Navbar';
 
 export default function Signup() {
+
+    
+    useEffect(()=>{
+        const storageuser = JSON.parse(localStorage.getItem("user" || '{}'));
+        if(storageuser?.email){
+          alert("you aready register here !");
+          window.location.href="/"
+        }
+        },[])
 
     const [name,setName]=useState()
     const [email,setEmail]=useState()
@@ -11,7 +23,6 @@ export default function Signup() {
     const [mobile,setMobile] =useState ()
     const [address ,setAddress]=useState()
     const [gender,setGender]=useState('female')
-
 
     const signupformore = async ()=>{
         if(!name){
@@ -52,6 +63,7 @@ alert(response?.data?.message);
     }
   return (
     <div>
+        <Navbar/>
 <div>
     <form className='signup-form-container'>
    
@@ -130,6 +142,7 @@ alert(response?.data?.message);
         </div>
 
         <button type='button' className='btn signup-btn' onClick={signupformore}>Signup</button>
+        <Link to="/login" className=' already-register-user-link'>alredy have an account ?</Link>
     </form>
 
 </div>

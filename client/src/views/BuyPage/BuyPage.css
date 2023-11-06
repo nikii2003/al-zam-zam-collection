@@ -1,0 +1,44 @@
+.flex-box{
+    display: flex;
+    margin: 10px;
+}
+.img{
+    height: 400px;
+    border-radius: 5px;
+    margin: 20px;
+   box-shadow: 0px 1px 5px 2px rgb(218, 205, 37);
+   padding: 20px;
+}
+.product-detail-div{
+    width: 880px;
+    margin: 20px;
+    height: 200px;
+}
+.btn-quantity{
+display: inline-block;
+padding: 3px;
+background-color: black;
+width: 50px;
+color: white;
+text-align: center;
+cursor: pointer;
+border-radius: 5px;
+}
+.quantity-text{
+    font-size: 20px;
+    padding: 10px 10px;
+    font-weight: bold;
+}
+.shipping-add-input{
+    margin-top: 20px;
+    height: 33px;
+    width: 500px;
+}
+.place-order-btn{
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+    background-color: rgb(7, 92, 7);
+    color: aliceblue;
+    cursor: pointer;
+}
