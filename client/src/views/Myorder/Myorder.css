@@ -1,0 +1,22 @@
+.orer-heading{
+margin-left: 80px;
+}
+.myorders-card{
+ margin: 20px;
+ width: 90%;
+box-shadow: 1px 0px 5px 0px black;
+ border-radius: 10px;
+ padding: 10px;
+}
+.name-link{
+    text-decoration: none;
+}
+.baged-danger{
+    background-color: red;
+}
+.baged-warning{
+    background-color: yellow;
+}
+.baged-success{
+    background-color: green;
+}
