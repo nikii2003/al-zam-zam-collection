@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const STATUS_BAGED_COLOR_MAP = {
-  "pending":"baged-danger",
+  "pendding":"baged-danger",
   "delivered":"baged-success",
   "shipped":"baged-warning"
 }

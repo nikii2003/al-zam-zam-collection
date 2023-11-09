@@ -30,6 +30,7 @@ margin: 10px;
 .product-price{
     text-align: center;
     font-weight: bold;
+    color: red;
 }
 .btn-buy-now{
     display: block;

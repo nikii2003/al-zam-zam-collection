@@ -1,0 +1,26 @@
+.footer-div{
+    width: 100%;
+    height: 400px;
+    background-color: black;
+    margin-top: 40px;
+}
+.al-zam-zam-collecton-heading{
+    text-align: center;
+    color: white;
+    padding: 50px;
+}
+.footer-desciption{
+ text-align: center;
+ color: white;
+font-size: 30px;
+
+}
+.footer-icon-img{
+display: flex;
+justify-content: center;
+
+}
+.img1{
+    margin: 20px;
+    border-radius: 50%;
+}

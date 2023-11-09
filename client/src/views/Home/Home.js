@@ -3,6 +3,7 @@ import "./Home.css"
 import Navbar from '../../component/Navbar/Navbar'
 import axios from 'axios'
 import ProductCard from '../../component/ProductCard/ProductCard.js'
+import Footer from '../../component/Footer/Footer.js'
 function Home() {
 
   const [products,setProducts]=useState([])
@@ -43,7 +44,9 @@ setProducts(response?.data?.data)
           })
         }
       </div>
+      <Footer/>
     </div>
+ 
   )
 }
 

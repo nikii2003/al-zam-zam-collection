@@ -34,10 +34,10 @@ function Navbar() {
               className="navbar-logout"
               onClick={() => {
                 localStorage.removeItem("user");
-                window.location.href = "/login";
+                window.location.href = "/login" ;
               }}
             >
-              <span> Logout</span>
+              <span className="logout">  Logout</span>
             </span>
           ) : null}
         </div>
